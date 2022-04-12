@@ -1,9 +1,12 @@
 import React from "react";
-import getData from "./getData";
+import GetData from "./GetData";
 
 const App = () => {
 
-  const data = getData(1).then((response) => console.log(response));
+  (async function data() {
+    let datas = await GetData(1);
+    console.log(datas);
+  })();
   
   return <div className="App"><h1>Hello world</h1></div>;
 };

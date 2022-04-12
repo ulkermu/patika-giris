@@ -1,12 +1,17 @@
 import axios from "axios";
 
-async function getData(number){
-    const {data: users} = await axios(`https://jsonplaceholder.typicode.com/users/${number}`);
+const GetData = async (userID) => {
 
-    const { data: posts} = await axios(`https://jsonplaceholder.typicode.com/posts?userId=${{data: users}.data.id}`);
+    if (userID === NaN) {
+        console.error('User ID not a number!')
+        return;
+    }
+
+    const { data: users } = await axios(`https://jsonplaceholder.typicode.com/users/${userID}`);
+
+    const { data: posts} = await axios(`https://jsonplaceholder.typicode.com/posts?userId=${userID}`);
     
-    return {data: users}, {data: posts}
-
+    return {...users, posts: posts};
 }
 
-export default getData
+export default GetData;
